@@ -6,16 +6,14 @@ node {
     gitcommit = readFile('.git/commit-id').trim()
   }
   stage('test') {
-    def contenedortest = docker.image('node:20-alpine')
-    contenedortest.pull()
-    contenedortest.inside {
+    nodejs(nodeJSInstallationName: 'nodejs-jenkins') {
       sh 'npm install --only=dev'
       sh 'npm test'
     }
   }
   stage('Docker Build & Push') {
     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-      def nuestraapp = docker.build("mikkew94/nodejsapp:${gitcommit}", '.')
+      def nuestraapp = docker.build("mikkew94/nodejsapp:${gitcommit}", 'api')
       nuestraapp.push()
     }
   }
