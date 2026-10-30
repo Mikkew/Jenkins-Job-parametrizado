@@ -7,8 +7,10 @@ node {
   }
   stage('test') {
     nodejs(nodeJSInstallationName: 'nodejs-jenkins') {
-      sh 'npm install --only=dev'
-      sh 'npm test'
+      dir('api') {
+        sh 'npm install --include=dev'
+        sh 'npm test'
+      }
     }
   }
   stage('Docker Build & Push') {

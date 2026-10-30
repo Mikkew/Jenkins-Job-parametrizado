@@ -9,8 +9,10 @@ node {
     def contenedortest = docker.image('node:20-alpine')
     contenedortest.pull()
     contenedortest.inside {
-      sh 'npm install --only=dev'
-      sh 'npm test'
+      dir('api') {
+        sh 'npm install --include=dev'
+        sh 'npm test'
+      }
     }
   }
   stage('Docker Build & Push') {
