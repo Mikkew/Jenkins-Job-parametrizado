@@ -107,7 +107,7 @@ docker run --rm -p 3000:3000 mikkew94/nodejsapp
 Los pipelines `8-pipeline-nodejs-1.groovy` y `9-pipeline-nodejs-2.groovy` ejecutan tres stages:
 
 1. **Verificación SCM**: `checkout scm` y obtención del commit corto (`git rev-parse --short HEAD`).
-2. **test**: `npm install --only=dev` y `npm test` (con el plugin NodeJS o dentro de `node:20-alpine`).
+2. **test**: `npm install --include=dev` y `npm test` dentro de `api/` (con el plugin NodeJS o dentro de `node:20-alpine`).
 3. **Docker Build & Push**: construye y publica `mikkew94/nodejsapp:<commit>` en Docker Hub,
    usando el contexto de build `api/`.
 
