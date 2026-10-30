@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "Jenkins Node.js pipeline",
   "private": true,
+  "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
   },
   "devDependencies": {
     "mocha": "^11.0.0"
