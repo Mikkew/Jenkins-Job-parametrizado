@@ -1,0 +1,12 @@
+{
+  "name": "nodejsapp",
+  "version": "1.0.0",
+  "description": "Jenkins Node.js pipeline",
+  "private": true,
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^11.0.0"
+  }
+}
