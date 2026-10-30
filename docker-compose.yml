@@ -1,0 +1,29 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk21
+    container_name: jenkins
+    user: root            # opcional: evita problemas de permisos con volúmenes/socket
+    ports:
+      - "8089:8080"       # UI web
+      - "50009:50000"     # conexión de agentes (JNLP)
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=true -Xmx1g
+      - TZ=America/Mexico_City
+    volumes:
+      - /opt/jenkins/jenkins_home:/var/jenkins_home
+      # Descomenta para que los pipelines puedan usar el Docker del host
+      # (requiere instalar el CLI de docker dentro del contenedor):
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      
+    networks:
+      jenkins-learning:
+        ipv4_address: 10.30.0.2
+
+networks:
+  jenkins-learning:
+    name: jenkins-learning
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.30.0.0/28
